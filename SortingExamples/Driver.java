@@ -9,6 +9,7 @@ public class Driver
 	static final int value = 20;
 	static int[] intArray = new int[value]; // = {90, 65, 7, 305, 120, 110, 8};
 	//static int[] intArray = {90, 65, 7, 305, 120, 110, 8};
+	//static int[] intArray = {8, 2, 5, 3, 10, 7, 1, 4, 6, 9};
 	
 	public static void main(String[] args) 
 	{
@@ -30,6 +31,7 @@ public class Driver
 		//MergeSort(intArray);
 		//QuickSort(intArray, 0, intArray.length-1);
 		SelectionSort(intArray);
+		//InsertionSort(intArray);
 		//BubbleSort(intArray);
 		System.out.println("");
 		for(int i=0; i< intArray.length; ++i)
@@ -140,8 +142,31 @@ public class Driver
 			
 	}
 	
+	public static void InsertionSort(int[] A)
+	{
+		//Invariant: After ith iteration of  loop first ith items are sorted
+		for(int i=1; i < A.length; i++)
+		{
+			int temp = A[i];
+			int j = i - 1;
+			int k = i;
+			while(temp < A[j])
+			{
+				A[k] = A[j];
+				A[j] = temp;
+				if(j > 0 && k > 0)
+				{
+					j--;
+					k--;
+				}
+				
+			}			
+		}
+	}
+	
 	public static void SelectionSort(int[] A)
 	{
+		//Invariant: After ith iteration of outer loop first ith items are in place
 		int min = 0;
 		for(int i=0; i < A.length - 1; i++)
 		{
@@ -161,6 +186,7 @@ public class Driver
 	
 	public static void BubbleSort(int[] A)
 	{
+		//Invariant: After ith iteration the last ith elements are in place
 		for(int i=0; i<A.length -1; i++)
 		{
 			for(int j=0; j < A.length -(1 +i); j++)
