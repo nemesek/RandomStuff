@@ -10,6 +10,7 @@ public class Driver
 	static int[] intArray = new int[value]; // = {90, 65, 7, 305, 120, 110, 8};
 	//static int[] intArray = {90, 65, 7, 305, 120, 110, 8};
 	//static int[] intArray = {8, 2, 5, 3, 10, 7, 1, 4, 6, 9};
+	static int heapSize;
 	
 	public static void main(String[] args) 
 	{
@@ -28,9 +29,12 @@ public class Driver
 		{
 			System.out.print(Integer.toString(intArray[i]) + ", ");
 		}
+		BuildMaxHeap(intArray);
+		HeapSort(intArray);
+		
 		//MergeSort(intArray);
 		//QuickSort(intArray, 0, intArray.length-1);
-		SelectionSort(intArray);
+		//SelectionSort(intArray);
 		//InsertionSort(intArray);
 		//BubbleSort(intArray);
 		System.out.println("");
@@ -79,6 +83,54 @@ public class Driver
 		
 	}
 	
+
+	public static void HeapSort(int[] A)
+	{
+		for(int i=A.length-1; i > 0; i--)
+		{
+			int temp = A[0];
+			A[0] = A[i];
+			A[i] = temp;
+			heapSize--;
+			MaxHeapify(A,0);
+		}
+	}
+	
+	public static void BuildMaxHeap(int[] A)
+	{
+		heapSize = A.length-1;
+		for(int i = A.length/2; i >= 0; i--)
+		{
+			MaxHeapify(A, i);
+		}
+	}
+	public static void MaxHeapify(int[] A, int i)
+	{
+		int largest;
+		int left = 2*i;
+		int right = 2*i + 1;
+		if(left <= heapSize && A[left] > A[i])
+		{
+			largest = left;
+		}
+		else
+		{
+			largest = i;
+		}
+		if(right <= heapSize && A[right] > A[largest])
+		{
+			largest = right;
+		}
+		if(largest != i)
+		{
+			int temp = A[i];
+			A[i] = A[largest];
+			A[largest] = temp;
+			MaxHeapify(A, largest);
+		}
+		
+	}
+
 	public static void MergeSort(int[] A)
 	{
 		int n = A.length;
